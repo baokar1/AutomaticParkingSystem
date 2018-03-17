@@ -21,7 +21,7 @@
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <mainClass>uk.co.a1dutch.remotecontrolledcars.RemoteControlledCars</mainClass>
+                                <mainClass>com.aps.AutomaticParkedCars</mainClass>
                             </manifest>
                         </archive>
                     </configuration>

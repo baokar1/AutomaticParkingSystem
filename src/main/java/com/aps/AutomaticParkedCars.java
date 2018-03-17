@@ -1,11 +1,11 @@
-package uk.co.a1dutch.remotecontrolledcars;
+package com.aps;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RemoteControlledCars {
+public class AutomaticParkedCars {
 
 	private static final int GRID_SIZE = 15;
 
@@ -16,7 +16,7 @@ public class RemoteControlledCars {
 
 	private List<Position> positions = new ArrayList<Position>();
 
-	public RemoteControlledCars(String input) {
+	public AutomaticParkedCars(String input) {
 		parsePositions(input);
 		checkVerticalBounds();
 		checkHorizontalBounds();
@@ -96,11 +96,11 @@ public class RemoteControlledCars {
 
 	public static void main(String[] args) {
 		if (args == null || args.length == 0 || args.length > 1) {
-			System.out.println("Usage uk.co.a1dutch.remotecontrolledcars.RemoteControlledCars <input>");
+			System.out.println("Usage AutomaticParkedCars <input>");
 			System.out.println("\tinput must match the following regular expression: " + INPUT_REGULAR_EXPRESSION);
 			return;
 		}
-		RemoteControlledCars cars = new RemoteControlledCars(args[0]);
+		AutomaticParkedCars cars = new AutomaticParkedCars(args[0]);
 
 		System.out.println("Car started at  : " + cars.getStartPosition().getVerticalAxis() + ","
 				+ cars.getStartPosition().getHorizontalAxis());

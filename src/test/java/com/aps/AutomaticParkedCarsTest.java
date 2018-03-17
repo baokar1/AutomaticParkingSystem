@@ -1,31 +1,31 @@
-package uk.co.a1dutch.remotecontrolledcars;
+package com.aps;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 
-public class RemoteControlledCarsTest {
+public class AutomaticParkedCarsTest {
 
 	@Test(expected = InvalidInputFormat.class)
 	public void invalid_input_format() throws Exception {
 		String input = "55RFLFRFLF";
 
-		new RemoteControlledCars(input);
+		new AutomaticParkedCars(input);
 	}
 
 	@Test(expected = InvalidInputFormat.class)
 	public void invalid_start_position() throws Exception {
 		String input = "16,16:RFLFRFLF";
 
-		new RemoteControlledCars(input);
+		new AutomaticParkedCars(input);
 	}
 
 	@Test
 	public void parses_start_position() throws Exception {
 		String input = "5,5:RFLFRFLF";
 
-		RemoteControlledCars cars = new RemoteControlledCars(input);
+		AutomaticParkedCars cars = new AutomaticParkedCars(input);
 
 		assertThat(cars.getStartPosition().getVerticalAxis(), is(5));
 		assertThat(cars.getStartPosition().getHorizontalAxis(), is(5));
@@ -36,7 +36,7 @@ public class RemoteControlledCarsTest {
 	public void parses_end_position() throws Exception {
 		String input = "5,5:RFLFRFLF";
 
-		RemoteControlledCars cars = new RemoteControlledCars(input);
+		AutomaticParkedCars cars = new AutomaticParkedCars(input);
 
 		assertThat(cars.getPositions().size(), is(9));
 
@@ -49,28 +49,28 @@ public class RemoteControlledCarsTest {
 	public void moves_out_of_bounds_north() throws Exception {
 		String input = "15,0:F";
 
-		new RemoteControlledCars(input);
+		new AutomaticParkedCars(input);
 	}
 
 	@Test(expected = OutOfBoundsException.class)
 	public void moves_out_of_bounds_south() throws Exception {
 		String input = "0,0:RRF";
 
-		new RemoteControlledCars(input);
+		new AutomaticParkedCars(input);
 	}
 
 	@Test(expected = OutOfBoundsException.class)
 	public void moves_out_of_bounds_east() throws Exception {
 		String input = "0,15:RF";
 
-		new RemoteControlledCars(input);
+		new AutomaticParkedCars(input);
 	}
 
 	@Test(expected = OutOfBoundsException.class)
 	public void moves_out_of_bounds_west() throws Exception {
 		String input = "0,0:LF";
 
-		new RemoteControlledCars(input);
+		new AutomaticParkedCars(input);
 	}
 
 	@Test
@@ -85,7 +85,7 @@ public class RemoteControlledCarsTest {
 
 	private void testVector(String input, int positions, int startVerticalAxis, int startHorizontalAxis,
 			int endVerticalAxis, int endHorizontalAxis, Direction endDirection) {
-		RemoteControlledCars cars = new RemoteControlledCars(input);
+		AutomaticParkedCars cars = new AutomaticParkedCars(input);
 
 		assertThat(cars.getPositions().size(), is(positions));
 

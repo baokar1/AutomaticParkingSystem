@@ -1,4 +1,4 @@
-package uk.co.a1dutch.remotecontrolledcars;
+package com.aps;
 
 /**
  * Specifies valid directions.
