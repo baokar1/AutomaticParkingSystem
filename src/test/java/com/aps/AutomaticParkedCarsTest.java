@@ -7,95 +7,39 @@ import org.junit.Test;
 
 public class AutomaticParkedCarsTest {
 
-	@Test(expected = InvalidInputFormat.class)
-	public void invalid_input_format() throws Exception {
-		String input = "55RFLFRFLF";
+    @Test
+    public void parses_end_position_input1() throws Exception {
+        String input = "5,5:RFLFRFLF";
 
-		new AutomaticParkedCars(input);
-	}
+        AutomaticParkedCars cars = new AutomaticParkedCars(input);
 
-	@Test(expected = InvalidInputFormat.class)
-	public void invalid_start_position() throws Exception {
-		String input = "16,16:RFLFRFLF";
+        assertThat(cars.getPositions().size(), is(9));
 
-		new AutomaticParkedCars(input);
-	}
+        assertThat(cars.getEndPosition().getVerticalAxis(), is(7));
+        assertThat(cars.getEndPosition().getHorizontalAxis(), is(7));
+    }
 
-	@Test
-	public void parses_start_position() throws Exception {
-		String input = "5,5:RFLFRFLF";
+    @Test
+    public void parses_end_position_input2() throws Exception {
+        String input = "5,5:FLFLFFRFFF";
 
-		AutomaticParkedCars cars = new AutomaticParkedCars(input);
+        AutomaticParkedCars cars = new AutomaticParkedCars(input);
 
-		assertThat(cars.getStartPosition().getVerticalAxis(), is(5));
-		assertThat(cars.getStartPosition().getHorizontalAxis(), is(5));
-		assertThat(cars.getStartPosition().getDirection(), is(Direction.North));
-	}
+        assertThat(cars.getPositions().size(), is(11));
 
-	@Test
-	public void parses_end_position() throws Exception {
-		String input = "5,5:RFLFRFLF";
+        assertThat(cars.getEndPosition().getVerticalAxis(), is(4));
+        assertThat(cars.getEndPosition().getHorizontalAxis(), is(1));
+    }
 
-		AutomaticParkedCars cars = new AutomaticParkedCars(input);
+    @Test
+    public void parses_end_position_input3() throws Exception {
+        String input = "6,6:FFLFFLFFLFF";
 
-		assertThat(cars.getPositions().size(), is(9));
+        AutomaticParkedCars cars = new AutomaticParkedCars(input);
 
-		assertThat(cars.getEndPosition().getVerticalAxis(), is(7));
-		assertThat(cars.getEndPosition().getHorizontalAxis(), is(7));
-		assertThat(cars.getEndPosition().getDirection(), is(Direction.North));
-	}
+        assertThat(cars.getPositions().size(), is(12));
 
-	@Test(expected = OutOfBoundsException.class)
-	public void moves_out_of_bounds_north() throws Exception {
-		String input = "15,0:F";
-
-		new AutomaticParkedCars(input);
-	}
-
-	@Test(expected = OutOfBoundsException.class)
-	public void moves_out_of_bounds_south() throws Exception {
-		String input = "0,0:RRF";
-
-		new AutomaticParkedCars(input);
-	}
-
-	@Test(expected = OutOfBoundsException.class)
-	public void moves_out_of_bounds_east() throws Exception {
-		String input = "0,15:RF";
-
-		new AutomaticParkedCars(input);
-	}
-
-	@Test(expected = OutOfBoundsException.class)
-	public void moves_out_of_bounds_west() throws Exception {
-		String input = "0,0:LF";
-
-		new AutomaticParkedCars(input);
-	}
-
-	@Test
-	public void test_vectors() throws Exception {
-		testVector("5,5:RFLFRFLF", 9, 5, 5, 7, 7, Direction.North);
-		testVector("6,6:FFLFFLFFLFF", 12, 6, 6, 6, 6, Direction.East);
-		testVector("5,5:FLFLFFRFFF", 11, 5, 5, 4, 1, Direction.West);
-
-		testVector("5,5:FFFFF", 6, 5, 5, 10, 5, Direction.North);
-		testVector("0,0:RRRR", 5, 0, 0, 0, 0, Direction.North);
-	}
-
-	private void testVector(String input, int positions, int startVerticalAxis, int startHorizontalAxis,
-			int endVerticalAxis, int endHorizontalAxis, Direction endDirection) {
-		AutomaticParkedCars cars = new AutomaticParkedCars(input);
-
-		assertThat(cars.getPositions().size(), is(positions));
-
-		assertThat(cars.getStartPosition().getVerticalAxis(), is(startVerticalAxis));
-		assertThat(cars.getStartPosition().getHorizontalAxis(), is(startHorizontalAxis));
-		assertThat(cars.getStartPosition().getDirection(), is(Direction.North));
-
-		assertThat(cars.getEndPosition().getVerticalAxis(), is(endVerticalAxis));
-		assertThat(cars.getEndPosition().getHorizontalAxis(), is(endHorizontalAxis));
-		assertThat(cars.getEndPosition().getDirection(), is(endDirection));
-	}
-
+        assertThat(cars.getEndPosition().getVerticalAxis(), is(6));
+        assertThat(cars.getEndPosition().getHorizontalAxis(), is(6));
+    }
 }
